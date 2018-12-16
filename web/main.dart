@@ -25,32 +25,30 @@ void main() {
   });
 
   submitBtn.addEventListener('click', (evt) async {
-    // using async/await
-    // TODO: Run name field validation
-    // Validate name field
-    submitBtn
-      ..addEventListener('click', (evt) async {
-        nameField.classes.add('is-danger');
-        validationBox.text = 'Please enter your name';
-      })
-      ..disabled = true;
+    // 1. Validate name field
+    if (nameField.value.trim().isEmpty) {
+      nameField.classes.add('is-danger');
+      validationBox.text = 'Please enter your name';
+      return;
+    }
+
+    submitBtn.disabled = true;
 
     try {
-      // Submit name to backend via POST
+      // 2. Submit name to backend via POST
       var response = await HttpRequest.postFormData(
-        'http://localhost:8080/signin',   // TODO: Create endpoint
-        {
-          'username': nameField.value,
-        }
-    );
-    // Handle success response and switch view
-    chatSigninBox.hidden = true;
-    chatRoomBox.hidden = false;
+        'http://localhost:8000/signin', // TODO: Endpoint to be created in next step
+        {'username': nameField.value}
+      );
+
+      // 3. Handle success response and switch view
+      chatSigninBox.hidden = true;
+      chatRoomBox.hidden = false;
     } catch (e) {
-      // Handle failure response
+      // 4. Handle failure response
       submitBtn
-      ..disabled = false
-      .. text = 'Failed to join chat. Try again?';
+        ..disabled = false
+        ..text = 'Failed to join chat. Try again?';
     }
   });
 }
