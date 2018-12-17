@@ -36,7 +36,7 @@ class ChatSigninView implements View {
   void prepare() {
     _contents.innerHtml = '''
     <div id="ChatSignin">
-      <h1 class="title">Les Chattes 🐱</h1>
+      <h1 class="title">FurryFiesta 🐱</h1>
       <div class="columns">
         <div class="column is-6">
           <div class="field">
