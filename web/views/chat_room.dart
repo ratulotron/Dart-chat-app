@@ -95,6 +95,10 @@ class ChatRoomView implements View {
 
   void _sendBtnClickHandler(e) {
     // TODO: Broadcast message to other chat users
+    print(messageField.value);
+    PreElement message = PreElement();
+    message.text = messageField.value;
+    chatRoomLog.setInnerHtml(message.toString());
     messageField.value = '';
   }
 }
